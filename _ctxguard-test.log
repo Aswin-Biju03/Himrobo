@@ -1,0 +1,16 @@
+[17:38:21] spawning headless Brave (temp profile)
+[17:38:29] site loading…
+[17:38:38] scroll: scrolled to 4494
+[17:38:41] [console] THREE.WebGLRenderer: Context Lost.
+[17:38:43] before loss: {"scrollY":4494,"nav":"navigate","canvases":[{"i":0,"kind":"other","lost":null,"top":-4494,"h":1896,"inView":false},{"i":1,"kind":"webgl2","lost":false,"top":0,"h":900,"inView":true},{"i":2,"kind":"other","lost":null,"top":6709,"h":876,"inView":false}]}
+[17:38:43] simulate GPU kill: loseContext() called on canvas 1425x900
+[17:38:43] [console] [him-ctx-guard] 3D context lost on a live canvas (live canvas lost); restoring in 4s if it does not recover
+[17:38:43] [console] THREE.WebGLRenderer: Context Lost.
+[17:38:44]   t+1s: {"nav":"navigate","scrollY":4494,"ready":"complete"}
+[17:38:45]   t+2s: {"nav":"navigate","scrollY":4494,"ready":"complete"}
+[17:38:46]   t+3s: {"nav":"navigate","scrollY":4494,"ready":"complete"}
+[17:38:47] [console] [him-ctx-guard] recovering the page (live canvas lost)
+[17:38:47]   t+4s: {"nav":"reload","scrollY":0,"ready":"loading"}
+[17:38:50] after reload settles: {"nav":"reload","scrollY":4494,"ready":"complete","canvases":3}
+[17:38:50] guard saved-scroll key after reload: null
+[17:38:50] PASS: page auto-reloaded after the simulated GPU kill

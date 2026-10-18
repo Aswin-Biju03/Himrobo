@@ -1,0 +1,25 @@
+[17:38:01] reports before: 4
+[17:38:01] spawning headless Brave (temp profile)
+[17:38:04] site loading…
+[17:38:14] [console] [him-ctx-guard] a 3D model failed to load; will recover once the site answers again
+[17:38:14] simulate model failure: dispatched
+[17:38:14] [console] [him-ctx-guard] recovering the page (3D models could not load)
+[17:38:15]   t+1s: {"nav":"reload","ready":"loading"}
+[17:38:17] new report files: ["report-2026-10-18T17-38-14-757Z.txt"]
+[17:38:17] report head:
+GUARD-AUTO-REPORT (him-ctx-recovery v3)
+at: 2026-10-18T17:38:14.749Z
+reason: 3D models could not load
+url: http://localhost:3000/
+ua: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36
+visibility: visible
+scrollY: 0
+fresh-canvas-webgl2: webgl2-ok
+canvases: 
+  1425x1895  2d
+  1425x2570  webgl2
+  1393x876  2d
+model-resources: 
+  /models/arm.glb  status=200  ms=2094
+[17:38:17] PASS: auto-reload happened
+[17:38:17] PASS: auto-report received with model-failure reason

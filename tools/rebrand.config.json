@@ -1,0 +1,110 @@
+{
+  "_help": "Applied in order — full sentences first, then paragraphs, then the hero word pills, then contact + brand renames. Rules with an empty \"to\" are skipped. Preview: npm run rebrand:dry  |  Apply: npm run rebrand",
+  "replacements": [
+    { "from": "Mind Robotics builds intelligent, broadly capable robots for industrial deployment in high-impact environments.", "to": "HIM Robotics provides expert technology solutions aiming to improve engineering productivity and reduce product cost.", "note": "meta description / og / twitter (all pages, markup + payload)" },
+
+    { "from": "aria-label=\"Mind Robotics is building universally capable robots to transform industrial work.\"", "to": "aria-label=\"HIM Robotics is providing expert technology solutions to improve engineering productivity.\"", "note": "hero headline aria-label (markup)" },
+    { "from": "\\\"plainText\\\":\\\"Mind Robotics is building universally capable robots to transform industrial work.\\\"", "to": "\\\"plainText\\\":\\\"HIM Robotics is providing expert technology solutions to improve engineering productivity.\\\"", "note": "hero headline plainText (RSC payload)" },
+
+    { "from": "Mind Robotics, LLC", "to": "HIM Robotics LLP", "note": "legal entity — Privacy + Terms" },
+
+    { "from": "We&#x27;re starting", "to": "HIM Robotics", "note": "About lead-in strong (markup)" },
+    { "from": "We're starting", "to": "HIM Robotics", "note": "About lead-in strong (payload)" },
+    { "from": " where the problems are hardest and the standards are least forgiving: the factory floor. Mind is collecting video data at industrial scale, capturing live, high-variability work as it happens on the line, starting with automotive manufacturing.", "to": " is founded and managed by young, dynamic and seasoned professionals with creative minds, passion for excellence and a strong vision for success. The promoters are Masters in Engineering and Management from premier schools.", "note": "About para 1 -> HIM 'Who We Are' #1" },
+    { "from": "Our foundation models learn spatial reasoning, object dynamics, and tool manipulation across real production hours, building a scalable intelligence layer that generalizes to new tasks and environments. The hardware we design works alongside the people and systems already in place.", "to": "Having decades of industry experience, spanning across various industries in Europe, US and Asia-Pacific, we provide expert solutions tailored to meet customer requirements.", "note": "About para 2 -> HIM 'Who We Are' #2" },
+    { "from": "With Rivian", "to": "HIM Robotics", "note": "deployment paragraph strong (markup + payload)" },
+    { "from": " as our first manufacturing partner, we&#x27;re building a rich dataset inside a live production facility and training on active vehicle lines. Our data pipeline is centered on learning from skilled operators as they perform highly dexterous tasks, distilling the actions, tools, context, and decisions that make each cycle successful.", "to": " provides expert technology solutions aiming to improve engineering productivity and reduce product cost.", "note": "deployment paragraph rest (markup)" },
+    { "from": " as our first manufacturing partner, we're building a rich dataset inside a live production facility and training on active vehicle lines. Our data pipeline is centered on learning from skilled operators as they perform highly dexterous tasks, distilling the actions, tools, context, and decisions that make each cycle successful.", "to": " provides expert technology solutions aiming to improve engineering productivity and reduce product cost.", "note": "deployment paragraph rest (payload)" },
+    { "from": "Mind’s live dataset gives our models a deep understanding of real-world physics, variance, and material behavior. By mastering diverse automotive tasks first, we’re building capabilities that transfer across all of industrial manufacturing.", "to": "Using data transformation, statistical analysis, and machine learning, we find patterns, make predictions, and turn process data into actionable insight.", "note": "dataset paragraph -> HIM data expertise" },
+    { "from": "Mind robots can finally help", "to": "our robots can finally help", "note": "factory-work paragraph" },
+    { "from": "At Mind, we believe that being hands on with hardware can solve the hardest problems in AI.", "to": "At HIM, we believe that being hands on with hardware can solve the hardest problems in engineering.", "note": "culture paragraph" },
+    { "from": "Mind offers the agility of a startup with the resources, data, and built-in customer base of an industrial pioneer.", "to": "HIM offers the agility of a startup with decades of industry experience across Europe, US and Asia-Pacific.", "note": "culture paragraph, 2nd sentence" },
+    { "from": "Our first robots are", "to": "Built on", "note": "heading pill 1" },
+    { "from": "learning on the job", "to": "industry experience", "note": "heading pill 2" },
+
+    { "from": ">universally</span>", "to": ">expert</span>", "note": "hero pill word (markup)" },
+    { "from": "\\\"text\\\":\\\"universally\\\"", "to": "\\\"text\\\":\\\"expert\\\"", "note": "hero pill word (payload)" },
+    { "from": ">capable</span>", "to": ">technology</span>", "note": "hero pill word (markup)" },
+    { "from": "\\\"text\\\":\\\"capable\\\"", "to": "\\\"text\\\":\\\"technology\\\"", "note": "hero pill word (payload)" },
+    { "from": ">building</span>", "to": ">providing</span>", "note": "hero word (markup)" },
+    { "from": "\\\"value\\\":\\\"building\\\"", "to": "\\\"value\\\":\\\"providing\\\"", "note": "hero word (payload)" },
+    { "from": ">robots</span>", "to": ">solutions</span>", "note": "hero word (markup)" },
+    { "from": "\\\"value\\\":\\\"robots\\\"", "to": "\\\"value\\\":\\\"solutions\\\"", "note": "hero word (payload)" },
+    { "from": ">transform</span>", "to": ">improve</span>", "note": "hero word (markup)" },
+    { "from": "\\\"value\\\":\\\"transform\\\"", "to": "\\\"value\\\":\\\"improve\\\"", "note": "hero word (payload)" },
+    { "from": ">industrial</span>", "to": ">engineering</span>", "note": "hero word (markup)" },
+    { "from": "\\\"value\\\":\\\"industrial\\\"", "to": "\\\"value\\\":\\\"engineering\\\"", "note": "hero word (payload)" },
+    { "from": ">work.</span>", "to": ">productivity.</span>", "note": "hero word (markup)" },
+    { "from": "\\\"value\\\":\\\"work.\\\"", "to": "\\\"value\\\":\\\"productivity.\\\"", "note": "hero word (payload)" },
+
+    { "from": "class=\"even:text-right\">Mind</span>", "to": "class=\"even:text-right\">HIM</span>", "note": "outro animated line (markup)" },
+    { "from": "\\\"know\\\",\\\"Mind\\\"", "to": "\\\"know\\\",\\\"HIM\\\"", "note": "outro animated line (payload)" },
+
+    { "from": "https://jobs.ashbyhq.com/mindrobotics", "to": "mailto:sales@himrobo.com", "note": "'Join us' + 'See open roles' links" },
+    { "from": "press@mindrobotics.com", "to": "sales@himrobo.com", "note": "contact email (mailto + visible)" },
+    { "from": "tel:+14084599351", "to": "tel:+918975758372", "note": "phone link href" },
+    { "from": "408-459-9351", "to": "+91-8975758372", "note": "phone as displayed" },
+    { "from": "Palo Alto, CA", "to": "Pune, India", "note": "company location (footer + contact dialog + legal)" },
+    { "from": "mindrobotics.com", "to": "himrobo.com", "note": "domain in legal text (after the email + jobs rules above)" },
+
+    { "from": "Mind Robotics", "to": "HIM Robotics", "note": "brand name — titles, meta, copy, footer, aria-labels" },
+    { "from": "MIND ROBOTICS", "to": "HIM ROBOTICS", "note": "brand name in ALL-CAPS legal text (Terms)" },
+
+    { "from": ">Mind</span>", "to": ">HIM</span>", "note": "Terms headline word-part 'Mind' (markup) — must stay AFTER the outro rule" },
+    { "from": "\\\"value\\\":\\\"Mind\\\"", "to": "\\\"value\\\":\\\"HIM\\\"", "note": "Terms headline word-part 'Mind' (RSC payload)" },
+    { "from": "M27.2 20.485c0 7.07 5.73 12.8 12.8 12.8s12.8-5.73 12.8-12.8-5.73-12.8-12.8-12.8-12.8 5.73-12.8 12.8Z", "to": "M0 38.4h80V25.6H0Z", "note": "monogram mark: middle dot -> H crossbar (header/footer, markup + payload)" },
+
+    { "from": "w-[32%] rounded-full bg-white mt-[9.6%] aspect-square self-start z-above-content", "to": "w-[32%] rounded-full bg-white mt-[14.4%] aspect-[5/2] -mx-[2%] w-[40%] rounded-none self-start z-above-content", "note": "hero mark: ball -> H crossbar, full rendered class (must run BEFORE the fragment rule below)" },
+
+    { "from": "mt-[9.6%] aspect-square self-start", "to": "mt-[14.4%] aspect-[5/2] -mx-[2%] w-[40%] rounded-none self-start", "note": "hero mark: ball fragment inside the chunk component (after the full-class rule above)" },
+
+    { "from": "mt-[9.6%] aspect-square w-[32%] cursor-pointer items-center self-start overflow-clip rounded-full bg-white", "to": "mt-0 aspect-[5/2] w-[40%] -mx-[2%] cursor-pointer items-center self-start overflow-clip rounded-none bg-white", "note": "video mark: pong ball button -> H crossbar (html + chunk)" },
+
+    { "from": "[[\"-22%\",\"-6%\"],[\"40%\",\"0%\"],[\"0%\",\"10%\"]]", "to": "[[\"-22%\",\"-6%\"],[\"0%\",\"80%\"],[\"-22%\",\"-6%\"]]", "note": "hero mark keyframes: align both stems, crossbar at 40-60% of stem height" },
+
+    { "from": "[[\"20%\",\"0%\"],[\"50%\",\"0%\"],[\"40%\",\"0%\"]]", "to": "[[\"20%\",\"0%\"],[\"300%\",\"200%\"],[\"20%\",\"0%\"]]", "note": "video mark keyframes: align both stems, crossbar at 40-60% of stem height" },
+
+    { "from": "z-above-content\" style=\"transform:translateY(40%)\"", "to": "z-above-content\" style=\"transform:translateY(0%)\"", "note": "hero crossbar initial inline style (p=0)" },
+
+    { "from": "z-behind-content\" style=\"transform:none\"", "to": "z-behind-content\" style=\"transform:translateY(-22%)\"", "note": "hero right stem initial inline style (p=0, aligned with left stem)" },
+
+    { "from": "style=\"transform:translateY(50%)\"", "to": "style=\"transform:translateY(300%)\"", "note": "video crossbar initial inline style (p=0)" },
+
+    { "from": "aria-hidden=\"true\" style=\"transform:translateY(40%)\"", "to": "aria-hidden=\"true\" style=\"transform:translateY(20%)\"", "note": "video right stem initial inline style (p=0, aligned with left stem)" },
+
+    { "from": "w-[32%] rounded-full bg-white mt-[14.4%] aspect-[5/2] -mx-[2%] w-[40%] rounded-none self-start z-above-content", "to": "w-[32%] rounded-full bg-white mt-[6.4%] aspect-square self-start z-above-content", "note": "hero mark: H crossbar -> centre dot, full rendered class (must run BEFORE the fragment rule below)" },
+
+    { "from": "mt-[14.4%] aspect-[5/2] -mx-[2%] w-[40%] rounded-none self-start", "to": "mt-[6.4%] aspect-square self-start", "note": "hero mark: crossbar fragment -> dot fragment inside the chunk component (after the full-class rule above)" },
+
+    { "from": "mt-0 aspect-[5/2] w-[40%] -mx-[2%] cursor-pointer items-center self-start overflow-clip rounded-none bg-white", "to": "mt-[24%] aspect-square w-[32%] cursor-pointer items-center self-start overflow-clip rounded-full bg-white", "note": "video mark: pong H crossbar -> centre dot (html + chunk)" },
+
+    { "from": "[[\"-22%\",\"-6%\"],[\"0%\",\"80%\"],[\"-22%\",\"-6%\"]]", "to": "[[\"-22%\",\"-6%\"],[\"0%\",\"40%\"],[\"-22%\",\"-6%\"]]", "note": "hero mark keyframes: dot stays centre (50%) of the aligned stems at all progress" },
+
+    { "from": "[[\"20%\",\"0%\"],[\"300%\",\"200%\"],[\"20%\",\"0%\"]]", "to": "[[\"20%\",\"0%\"],[\"50%\",\"0%\"],[\"20%\",\"0%\"]]", "note": "video mark keyframes: dot stays centre (50%) of the aligned stems at all progress" },
+
+    { "from": "style=\"transform:translateY(300%)\"", "to": "style=\"transform:translateY(50%)\"", "note": "video dot initial inline style (p=0) - hero dot stays translateY(0%)" },
+
+    { "from": "#299093", "to": "#e05c00", "note": "primary accent: teal -> deep orange (hero tag-pill styles markup + payload, JS COLORS palette, CSS theme var)" },
+    { "from": "#ff6600", "to": "#e05c00", "note": "primary accent softened: vivid logo orange -> deeper calmer orange (same length, T-rows stay aligned)" },
+
+    { "from": "Pick and place", "to": "Knowledge based consulting", "note": "factory section: service 1 title (card + tab aria-label, html + chunk config name)" },
+    { "from": "Sorting", "to": "Technology Solutions", "note": "factory section: service 2 title" },
+    { "from": "Fastening", "to": "Recommender Systems", "note": "factory section: service 3 title" },
+    { "from": "Connectors", "to": "Labs / Research", "note": "factory section: service 4 title" },
+
+    { "from": "Locating, grasping, and placing objects that vary in angle, occlusion, and orientation, with high precision.", "to": "Design and manufacturing intelligence: product improvements that reduce part count and cost, engineering problem solving through analysis, optimum part handling solutions, and automation with PLCs, sensors and actuators.", "note": "service 1 description (markup + payload)" },
+    { "from": "Making a real-time call on visually similar items and routing each one correctly, under line speed pressure.", "to": "Robotics and Internet of Things: industrial, commercial and defence / nuclear applications, sensor selection with circuitry for data capture, and data analytics from transformation to machine-learning insight.", "note": "service 2 description (markup + payload)" },
+    { "from": "Joining parts that don&#x27;t always align, modulating force and sequence to seat them correctly, and recovering when they don&#x27;t.", "to": "Manufacturing and assembly risk prediction, engineering de-skilling to reduce human error, and anomaly detection with actionable early warning of failures.", "note": "service 3 description (markup)" },
+    { "from": "Joining parts that don't always align, modulating force and sequence to seat them correctly, and recovering when they don't.", "to": "Manufacturing and assembly risk prediction, engineering de-skilling to reduce human error, and anomaly detection with actionable early warning of failures.", "note": "service 3 description (payload)" },
+    { "from": "Achieving a secure, verified fit despite flexible harnesses, part variation, and tight tolerances.", "to": "Gesture recognition for intuitive interfaces, visual inspection with camera, laser and IR sensors, and custom AI that combines sensors and data into adaptive systems.", "note": "service 4 description (markup + payload)" },
+    { "from": "Intelligence on", "to": "Services we", "note": "hero tag pill line 1 (markup + payload)" },
+    { "from": "the factory floor", "to": "provide", "note": "hero tag pill line 2 (markup + payload)" }
+  ],
+  "targets": [
+    "content/*.html",
+    "vendor/_next/static/chunks/*.js",
+    "vendor/_next/static/chunks/*.css",
+    "public/noop.js",
+    "public/favicon.svg"
+  ]
+}

@@ -1,0 +1,444 @@
+{
+ "startedAt": "2026-10-18T16:43:55.141Z",
+ "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+ "isBrave": "no-brave-api",
+ "innerSize": "1600x1000",
+ "screen": "800x600",
+ "dpr": 1,
+ "pageVisibility": "visible",
+ "reducedMotion": false,
+ "cores": 12,
+ "deviceMemoryGB": 16,
+ "webgpu": "object",
+ "rafCadence": {
+  "frames": 45,
+  "ms": 393
+ },
+ "webglProbe": {
+  "webgl2": true,
+  "webgl1": true,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "vendor": "Google Inc. (NVIDIA)",
+  "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+  "maxTexture": 16384,
+  "attrs": {
+   "alpha": true,
+   "antialias": false,
+   "depth": true,
+   "desynchronized": false,
+   "failIfMajorPerformanceCaveat": false,
+   "powerPreference": "high-performance",
+   "premultipliedAlpha": true,
+   "preserveDrawingBuffer": false,
+   "stencil": false,
+   "xrCompatible": false
+  },
+  "benchBig": {
+   "px": "1920x1080",
+   "frames": 30,
+   "totalMs": 0,
+   "msPerFrame": 0
+  },
+  "benchSmall": {
+   "px": "320x180",
+   "frames": 45,
+   "totalMs": 0,
+   "msPerFrame": 0
+  },
+  "lostDuringProbe": false
+ },
+ "siteIframe": {
+  "errors": [],
+  "contextLost": [],
+  "console": [
+   {
+    "t": 365,
+    "lvl": "warn",
+    "msg": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "n": 2
+   },
+   {
+    "t": 6755,
+    "lvl": "log",
+    "msg": "THREE.WebGLRenderer: Context Lost.",
+    "n": 1
+   },
+   {
+    "t": 11308,
+    "lvl": "warn",
+    "msg": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "n": 1
+   },
+   {
+    "t": 12294,
+    "lvl": "log",
+    "msg": "THREE.WebGLRenderer: Context Lost.",
+    "n": 1
+   }
+  ],
+  "loadMs": 156,
+  "size": "1550x750",
+  "resources": {
+   "total": 44,
+   "glb": [
+    "body.glb@19ms",
+    "fastening.glb@19ms",
+    "connectors.glb@19ms",
+    "arm.glb@19ms",
+    "pick-and-place.glb@19ms",
+    "hand.glb@19ms",
+    "sorting.glb@19ms"
+   ],
+   "js": 23,
+   "css": 6
+  },
+  "atTop": {
+   "scrollY": 0,
+   "visibility": "visible",
+   "docTitle": "Home | HIM Robotics",
+   "lenisGlobal": "object",
+   "htmlClass": "bg-grey-50 overflow-x-hidden text-black lenis",
+   "preloadLinks": 7,
+   "imgs": 8,
+   "cardText": "Knowledge based consulting Design and manufacturing intelligence: product improvements that reduce part count ",
+   "draws": 3028,
+   "lastDrawAgoMs": 7,
+   "canvases": [
+    {
+     "i": 0,
+     "css": "1550x2027@top0",
+     "viewportVisible": true,
+     "attr": "1550x2027",
+     "cssW": 1550,
+     "cssH": 2027,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "2d"
+    },
+    {
+     "i": 1,
+     "css": "1550x2590@top0",
+     "viewportVisible": true,
+     "attr": "1550x2589",
+     "cssW": 1550,
+     "cssH": 2590,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "webgl2",
+     "lost": false,
+     "glRenderer": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+     "attrs": "alpha,aa,high-performance",
+     "paint": {
+      "readPixels": [
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 228,
+        "avg": 210,
+        "nzPct": 96
+       }
+      ],
+      "glError": 0,
+      "drawImageNzPct": 97
+     }
+    },
+    {
+     "i": 2,
+     "css": "1518x726@top10895",
+     "viewportVisible": false,
+     "attr": "1518x726",
+     "cssW": 1518,
+     "cssH": 726,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "2d"
+    }
+   ]
+  },
+  "scrolledToWork": true,
+  "atWork": {
+   "scrollY": 8400,
+   "visibility": "visible",
+   "docTitle": "Home | HIM Robotics",
+   "lenisGlobal": "object",
+   "htmlClass": "bg-grey-50 overflow-x-hidden text-black lenis",
+   "preloadLinks": 7,
+   "imgs": 8,
+   "cardText": "Labs / Research Gesture recognition for intuitive interfaces, visual inspection with camera, laser and IR sens",
+   "draws": 27524,
+   "lastDrawAgoMs": 1,
+   "canvases": [
+    {
+     "i": 0,
+     "css": "1550x2027@top-8400",
+     "viewportVisible": false,
+     "attr": "1550x2027",
+     "cssW": 1550,
+     "cssH": 2027,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "2d"
+    },
+    {
+     "i": 1,
+     "css": "1107x1145@top151",
+     "viewportVisible": true,
+     "attr": "1106x1144",
+     "cssW": 1107,
+     "cssH": 1145,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "webgl2",
+     "lost": false,
+     "glRenderer": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+     "attrs": "alpha,aa,high-performance",
+     "paint": {
+      "readPixels": [
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 21,
+        "max": 228,
+        "avg": 222,
+        "nzPct": 100
+       },
+       {
+        "min": 0,
+        "max": 228,
+        "avg": 214,
+        "nzPct": 98
+       }
+      ],
+      "glError": 0,
+      "drawImageNzPct": 98
+     }
+    },
+    {
+     "i": 2,
+     "css": "1518x726@top2495",
+     "viewportVisible": false,
+     "attr": "1518x726",
+     "cssW": 1518,
+     "cssH": 726,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "2d"
+    }
+   ]
+  },
+  "scrolledToServices": true,
+  "atServices": {
+   "scrollY": 5419,
+   "visibility": "visible",
+   "docTitle": "Home | HIM Robotics",
+   "lenisGlobal": "object",
+   "htmlClass": "bg-grey-50 overflow-x-hidden text-black lenis",
+   "preloadLinks": 7,
+   "imgs": 8,
+   "cardText": "Technology Solutions Robotics and Internet of Things: industrial, commercial and defence / nuclear application",
+   "draws": 87844,
+   "lastDrawAgoMs": 1,
+   "canvases": [
+    {
+     "i": 0,
+     "css": "1550x2027@top-5419",
+     "viewportVisible": false,
+     "attr": "1550x2027",
+     "cssW": 1550,
+     "cssH": 2027,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "2d"
+    },
+    {
+     "i": 1,
+     "css": "1550x750@top0",
+     "viewportVisible": true,
+     "attr": "1550x750",
+     "cssW": 1550,
+     "cssH": 750,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "webgl2",
+     "lost": false,
+     "glRenderer": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+     "attrs": "alpha,high-performance",
+     "paint": {
+      "readPixels": [
+       {
+        "min": 205,
+        "max": 228,
+        "avg": 228,
+        "nzPct": 100
+       },
+       {
+        "min": 205,
+        "max": 228,
+        "avg": 228,
+        "nzPct": 100
+       },
+       {
+        "min": 205,
+        "max": 228,
+        "avg": 227,
+        "nzPct": 100
+       },
+       {
+        "min": 205,
+        "max": 228,
+        "avg": 227,
+        "nzPct": 100
+       },
+       {
+        "min": 21,
+        "max": 243,
+        "avg": 214,
+        "nzPct": 100
+       }
+      ],
+      "glError": 0,
+      "drawImageNzPct": 100
+     }
+    },
+    {
+     "i": 2,
+     "css": "1518x726@top5476",
+     "viewportVisible": false,
+     "attr": "1518x726",
+     "cssW": 1518,
+     "cssH": 726,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "2d"
+    }
+   ]
+  },
+  "atServices2": {
+   "scrollY": 5419,
+   "visibility": "visible",
+   "docTitle": "Home | HIM Robotics",
+   "lenisGlobal": "object",
+   "htmlClass": "bg-grey-50 overflow-x-hidden text-black lenis",
+   "preloadLinks": 7,
+   "imgs": 8,
+   "cardText": "Technology Solutions Robotics and Internet of Things: industrial, commercial and defence / nuclear application",
+   "draws": 149897,
+   "lastDrawAgoMs": 0,
+   "canvases": [
+    {
+     "i": 0,
+     "css": "1550x2027@top-5419",
+     "viewportVisible": false,
+     "attr": "1550x2027",
+     "cssW": 1550,
+     "cssH": 2027,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "2d"
+    },
+    {
+     "i": 1,
+     "css": "1550x750@top0",
+     "viewportVisible": true,
+     "attr": "1550x750",
+     "cssW": 1550,
+     "cssH": 750,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "webgl2",
+     "lost": false,
+     "glRenderer": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+     "attrs": "alpha,high-performance",
+     "paint": {
+      "readPixels": [
+       {
+        "min": 205,
+        "max": 228,
+        "avg": 228,
+        "nzPct": 100
+       },
+       {
+        "min": 205,
+        "max": 228,
+        "avg": 228,
+        "nzPct": 100
+       },
+       {
+        "min": 205,
+        "max": 228,
+        "avg": 227,
+        "nzPct": 100
+       },
+       {
+        "min": 205,
+        "max": 228,
+        "avg": 227,
+        "nzPct": 100
+       },
+       {
+        "min": 21,
+        "max": 230,
+        "avg": 218,
+        "nzPct": 100
+       }
+      ],
+      "glError": 0,
+      "drawImageNzPct": 100
+     }
+    },
+    {
+     "i": 2,
+     "css": "1518x726@top5476",
+     "viewportVisible": false,
+     "attr": "1518x726",
+     "cssW": 1518,
+     "cssH": 726,
+     "pxRatio": 1,
+     "connected": true,
+     "context": "2d"
+    }
+   ]
+  }
+ },
+ "summary": "WebGL2=true | renderer=ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11) | bench 1920x1080=0ms/frame | site frame load=156ms | live webgl contexts @work=1 | last scene draw @work=1ms ago",
+ "finishedAt": "2026-10-18T16:44:14.949Z"
+}

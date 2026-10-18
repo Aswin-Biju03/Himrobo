@@ -1,0 +1,20 @@
+/* Lenis 1.3.27 base CSS (vendored), minus `.lenis-stopped { overflow: clip }`:
+   this clone locks background scroll via Lenis' `stop()` (which prevents wheel
+   default) instead of hiding the root scrollbar, so opening a dialog does not
+   shift the layout by the scrollbar width. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}

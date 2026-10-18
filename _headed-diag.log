@@ -1,0 +1,15 @@
+[15:31:48] spawning HEADED Brave (a window will appear on screen for about 2 minutes)
+[15:31:48] window maximized (id 1709310675)
+[15:31:48] diag page loading (headed)
+[15:31:56] [console.log] THREE.WebGLRenderer: Context Lost.
+[15:31:58]   ...diag still running: Loading the home page in the test frame — about 20 s, keep this tab open…
+[15:32:00] [console.log] THREE.WebGLRenderer: Context Lost.
+[15:32:04] diag finished after ~16s
+[15:32:04] report saved: 5392 bytes -> _diag-report-headed.txt
+[15:32:05] shot _diag-headed-iframe.png
+[15:32:06] shot _diag-headed-page.png
+[15:32:06] probe patch: patched
+[15:32:14] site sample @hero: {"scrollY":0,"draws":3052,"lastDrawAgoMs":2040,"canvases":[{"i":0,"t":"2d","w":1905,"h":2480,"top":0,"lost":null},{"i":1,"t":"webgl2","w":1905,"h":3223,"top":0,"lost":false},{"i":2,"t":"2d","w":1873,"h":934,"top":13063,"lost":null}]}
+[15:32:20] site sample @services: {"scrollY":5448,"draws":3052,"lastDrawAgoMs":8053,"canvases":[{"i":0,"t":"2d","w":1905,"h":2480,"top":-5448,"lost":null},{"i":1,"t":"webgl2","w":1905,"h":3223,"top":-5448,"lost":false},{"i":2,"t":"2d","w":1873,"h":934,"top":7615,"lost":null}]}
+[15:32:20] shot _headed-services.png
+[15:32:20] done — closing window

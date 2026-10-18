@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HIM monogram — M to H preview</title>
+<style>
+  body { margin: 0; background: #f0f0f0; font-family: system-ui, sans-serif; padding: 28px; }
+  h1 { font-size: 18px; margin: 0 0 18px; color: #061a1e; }
+  .row { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 28px; }
+  .card { background: #fff; padding: 20px 24px 12px; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .card.dark { background: #061a1e; }
+  .lbl { font-size: 12px; color: #666; margin-top: 10px; }
+  .card.dark .lbl { color: #9ab; }
+  .cap { font-size: 12px; color: #888; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<h1>Monogram rebuild: M &rarr; H (left pill + dot + right pill &rarr; left pill + crossbar + right pill)</h1>
+
+<div class="row">
+  <div class="card">
+    <div class="cap">before (M)</div>
+    <svg width="240" viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#061a1e" d="M25.6 51.2V12.8C25.6 5.73 19.87 0 12.8 0S0 5.73 0 12.8v38.4C0 58.27 5.73 64 12.8 64s12.8-5.73 12.8-12.8Z"/>
+      <path fill="#061a1e" d="M27.2 20.485c0 7.07 5.73 12.8 12.8 12.8s12.8-5.73 12.8-12.8-5.73-12.8-12.8-12.8-12.8 5.73-12.8 12.8Z"/>
+      <path fill="#061a1e" d="M80 51.2V12.8C80 5.73 74.27 0 67.2 0c-7.069 0-12.8 5.73-12.8 12.8v38.4c0 7.07 5.731 12.8 12.8 12.8C74.27 64 80 58.27 80 51.2Z"/>
+    </svg>
+    <div class="lbl">header/footer monogram, original 3 paths</div>
+  </div>
+  <div class="card">
+    <div class="cap">after (H)</div>
+    <svg width="240" viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#061a1e" d="M25.6 51.2V12.8C25.6 5.73 19.87 0 12.8 0S0 5.73 0 12.8v38.4C0 58.27 5.73 64 12.8 64s12.8-5.73 12.8-12.8Z"/>
+      <path fill="#061a1e" d="M0 38.4h80V25.6H0Z"/>
+      <path fill="#061a1e" d="M80 51.2V12.8C80 5.73 74.27 0 67.2 0c-7.069 0-12.8 5.73-12.8 12.8v38.4c0 7.07 5.731 12.8 12.8 12.8C74.27 64 80 58.27 80 51.2Z"/>
+    </svg>
+    <div class="lbl">dot &rarr; full-width crossbar (replaces middle path)</div>
+  </div>
+  <div class="card dark">
+    <div class="cap" style="color:#9ab">after on dark</div>
+    <svg width="240" viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#f7f7f2" d="M25.6 51.2V12.8C25.6 5.73 19.87 0 12.8 0S0 5.73 0 12.8v38.4C0 58.27 5.73 64 12.8 64s12.8-5.73 12.8-12.8Z"/>
+      <path fill="#f7f7f2" d="M0 38.4h80V25.6H0Z"/>
+      <path fill="#f7f7f2" d="M80 51.2V12.8C80 5.73 74.27 0 67.2 0c-7.069 0-12.8 5.73-12.8 12.8v38.4c0 7.07 5.731 12.8 12.8 12.8C74.27 64 80 58.27 80 51.2Z"/>
+    </svg>
+    <div class="lbl">same geometry, light fill</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="card">
+    <div class="cap">favicon before (original PNG, 8&times; pixelated)</div>
+    <img src="_mark-backup/favicon.original.png" width="256" height="256" style="image-rendering: pixelated;">
+    <div class="lbl">32&times;32 png: 2 round bars + small dot</div>
+  </div>
+  <div class="card">
+    <div class="cap">favicon after (new real SVG, 8&times;)</div>
+    <img src="../public/favicon.svg" width="256" height="256">
+    <div class="lbl">same micro-geometry, dot &rarr; crossbar</div>
+  </div>
+  <div class="card">
+    <div class="cap">favicon after at native sizes (16/32/96)</div>
+    <div style="display:flex;gap:14px;align-items:center;height:110px">
+      <img src="../public/favicon.svg" width="96">
+      <img src="../public/favicon.svg" width="32">
+      <img src="../public/favicon.svg" width="16">
+    </div>
+    <div class="lbl">crisp at every size now (vector)</div>
+  </div>
+</div>
+</body>
+</html>

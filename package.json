@@ -1,0 +1,20 @@
+{
+  "name": "mind-robotics-clone-next",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "100% fidelity Next.js (App Router) clone of www.mindrobotics.com, reusing the original compiled front-end.",
+  "scripts": {
+    "dev": "node server.mjs --dev",
+    "build": "next build",
+    "start": "node server.mjs",
+    "rebrand": "node tools/rebrand.mjs",
+    "rebrand:dry": "node tools/rebrand.mjs --dry"
+  },
+  "dependencies": {
+    "lenis": "^1.3.27",
+    "next": "^16.4.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  }
+}

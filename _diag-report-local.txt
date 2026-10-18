@@ -1,0 +1,299 @@
+{
+ "startedAt": "2026-10-18T15:18:26.282Z",
+ "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+ "isBrave": true,
+ "innerSize": "1920x1040",
+ "screen": "2560x1440",
+ "dpr": 1,
+ "pageVisibility": "visible",
+ "reducedMotion": false,
+ "cores": 5,
+ "deviceMemoryGB": 8,
+ "webgpu": "object",
+ "rafCadence": {
+  "frames": 45,
+  "ms": 454
+ },
+ "webglProbe": {
+  "webgl2": true,
+  "webgl1": true,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "vendor": "Google Inc. (NVIDIA)",
+  "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+  "maxTexture": 16384,
+  "attrs": {
+   "alpha": true,
+   "antialias": false,
+   "depth": true,
+   "desynchronized": false,
+   "failIfMajorPerformanceCaveat": false,
+   "powerPreference": "high-performance",
+   "premultipliedAlpha": true,
+   "preserveDrawingBuffer": false,
+   "stencil": false,
+   "xrCompatible": false
+  },
+  "benchBig": {
+   "px": "1920x1080",
+   "frames": 30,
+   "totalMs": 0,
+   "msPerFrame": 0
+  },
+  "benchSmall": {
+   "px": "320x180",
+   "frames": 45,
+   "totalMs": 0,
+   "msPerFrame": 0
+  },
+  "lostDuringProbe": false
+ },
+ "siteIframe": {
+  "errors": [],
+  "contextLost": [],
+  "loadMs": 177,
+  "size": "1280x760",
+  "resources": {
+   "total": 43,
+   "glb": [
+    "arm.glb@23ms",
+    "body.glb@23ms",
+    "connectors.glb@23ms",
+    "fastening.glb@23ms",
+    "hand.glb@23ms",
+    "pick-and-place.glb@24ms",
+    "sorting.glb@24ms"
+   ],
+   "js": 22,
+   "css": 6
+  },
+  "atTop": {
+   "scrollY": 0,
+   "visibility": "visible",
+   "docTitle": "Home | HIM Robotics",
+   "lenisGlobal": "object",
+   "htmlClass": "bg-grey-50 overflow-x-hidden text-black lenis",
+   "preloadLinks": 7,
+   "imgs": 8,
+   "draws": 2964,
+   "lastDrawAgoMs": 3,
+   "canvases": [
+    {
+     "i": 0,
+     "css": "1280x1734@top0",
+     "viewportVisible": true,
+     "attr": "1280x1734",
+     "connected": true,
+     "context": "2d"
+    },
+    {
+     "i": 1,
+     "css": "1280x2304@top0",
+     "viewportVisible": true,
+     "attr": "1280x2304",
+     "connected": true,
+     "context": "webgl2",
+     "lost": false,
+     "attrs": "alpha,aa,high-performance",
+     "paint": {
+      "readPixels": [
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 203,
+        "avg": 67,
+        "nzPct": 36
+       },
+       {
+        "min": 0,
+        "max": 228,
+        "avg": 201,
+        "nzPct": 94
+       }
+      ],
+      "glError": 0,
+      "drawImageNzPct": 94
+     }
+    },
+    {
+     "i": 2,
+     "css": "1248x736@top10458",
+     "viewportVisible": false,
+     "attr": "1248x736",
+     "connected": true,
+     "context": "2d"
+    }
+   ]
+  },
+  "scrolledToWork": true,
+  "atWork": {
+   "scrollY": 8090,
+   "visibility": "visible",
+   "docTitle": "Home | HIM Robotics",
+   "lenisGlobal": "object",
+   "htmlClass": "bg-grey-50 overflow-x-hidden text-black lenis",
+   "preloadLinks": 7,
+   "imgs": 8,
+   "draws": 29140,
+   "lastDrawAgoMs": 1,
+   "canvases": [
+    {
+     "i": 0,
+     "css": "1280x1734@top-8090",
+     "viewportVisible": false,
+     "attr": "1280x1734",
+     "connected": true,
+     "context": "2d"
+    },
+    {
+     "i": 1,
+     "css": "904x935@top151",
+     "viewportVisible": true,
+     "attr": "904x935",
+     "connected": true,
+     "context": "webgl2",
+     "lost": false,
+     "attrs": "alpha,aa,high-performance",
+     "paint": {
+      "readPixels": [
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 21,
+        "max": 228,
+        "avg": 220,
+        "nzPct": 100
+       },
+       {
+        "min": 0,
+        "max": 228,
+        "avg": 125,
+        "nzPct": 66
+       }
+      ],
+      "glError": 0,
+      "drawImageNzPct": 68
+     }
+    },
+    {
+     "i": 2,
+     "css": "1248x736@top2368",
+     "viewportVisible": false,
+     "attr": "1248x736",
+     "connected": true,
+     "context": "2d"
+    }
+   ]
+  },
+  "scrolledToServices": false,
+  "atServices": {
+   "scrollY": 8090,
+   "visibility": "visible",
+   "docTitle": "Home | HIM Robotics",
+   "lenisGlobal": "object",
+   "htmlClass": "bg-grey-50 overflow-x-hidden text-black lenis",
+   "preloadLinks": 7,
+   "imgs": 8,
+   "draws": 52260,
+   "lastDrawAgoMs": 1,
+   "canvases": [
+    {
+     "i": 0,
+     "css": "1280x1734@top-8090",
+     "viewportVisible": false,
+     "attr": "1280x1734",
+     "connected": true,
+     "context": "2d"
+    },
+    {
+     "i": 1,
+     "css": "904x935@top151",
+     "viewportVisible": true,
+     "attr": "904x935",
+     "connected": true,
+     "context": "webgl2",
+     "lost": false,
+     "attrs": "alpha,aa,high-performance",
+     "paint": {
+      "readPixels": [
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "nzPct": 0
+       },
+       {
+        "min": 21,
+        "max": 228,
+        "avg": 220,
+        "nzPct": 100
+       },
+       {
+        "min": 228,
+        "max": 228,
+        "avg": 228,
+        "nzPct": 100
+       }
+      ],
+      "glError": 0,
+      "drawImageNzPct": 100
+     }
+    },
+    {
+     "i": 2,
+     "css": "1248x736@top2368",
+     "viewportVisible": false,
+     "attr": "1248x736",
+     "connected": true,
+     "context": "2d"
+    }
+   ]
+  }
+ },
+ "summary": "WebGL2=true | renderer=ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11) | bench 1920x1080=0ms/frame | site frame load=177ms | live webgl contexts @work=1 | last scene draw @work=1ms ago",
+ "finishedAt": "2026-10-18T15:18:42.092Z"
+}

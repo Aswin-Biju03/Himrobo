@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HIM Robotics — GPU / 3D diagnostic</title>
+<style>
+  body { font: 13px/1.55 Consolas, ui-monospace, SFMono-Regular, Menlo, monospace; margin: 20px 24px 60px; background: #101010; color: #d8d8d8; }
+  h1 { font-size: 16px; color: #e05c00; margin: 0 0 10px; }
+  #status { font-size: 14px; padding: 10px 14px; border-radius: 8px; background: #2a2412; border: 1px solid #6e5a2c; margin: 0 0 12px; }
+  #status.ok { background: #14301c; border-color: #2c6e3f; }
+  #status.err { background: #331414; border-color: #6e2c2c; }
+  pre { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 12px; overflow: auto; max-height: 60vh; white-space: pre-wrap; word-break: break-word; margin: 0 0 12px; }
+  button { font: inherit; padding: 8px 16px; border-radius: 6px; border: 1px solid #e05c00; background: #e05c00; color: #fff; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  #hint { color: #9c9; margin-left: 10px; }
+  .frame-wrap { border: 1px solid #333; border-radius: 8px; overflow: hidden; margin: 0 0 12px; }
+  iframe#site { width: 100%; height: calc(100vh - 250px); min-height: 640px; border: 0; display: block; background: #000; }
+  .note { color: #888; }
+</style>
+</head>
+<body>
+<h1>HIM Robotics — GPU / 3D scene diagnostic</h1>
+<p id="status">JavaScript has NOT started yet — if this text never changes, page scripts are being blocked in this browser.</p>
+<noscript><p style="color:#f66">JavaScript is disabled for this page.</p></noscript>
+<div class="frame-wrap"><iframe id="site" title="live site inside the diagnostic"></iframe></div>
+<p class="note">The frame above is the real home page running inside this page (same browser session). It will scroll around by itself — that is the test.</p>
+<pre id="report">starting…</pre>
+<p><button id="copy" hidden>Copy report</button><span id="hint" hidden>Then paste it into the chat with the assistant.</span></p>
+<script>
+(function () {
+  'use strict';
+  var statusEl = document.getElementById('status');
+  var reportEl = document.getElementById('report');
+  var copyBtn = document.getElementById('copy');
+  var hintEl = document.getElementById('hint');
+  var frameWrap = document.querySelector('.frame-wrap');
+  var startedMs = Date.now();
+  var out = { startedAt: new Date().toISOString() };
+  var notes = [];
+  var finished = false;
+
+  window.addEventListener('error', function (e) { notes.push('top window error: ' + (e.message || e.type)); });
+
+  function setStatus(t, cls) { statusEl.textContent = t; if (cls) statusEl.className = cls; }
+  function render() {
+    reportEl.textContent = JSON.stringify(out, null, 1) + (notes.length ? '\n\nnotes:\n' + notes.join('\n') : '');
+  }
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function scrollTop(el) { try { el.scrollIntoView({ block: 'start', behavior: 'auto' }); } catch (e) {} }
+
+  function summary() {
+    var g = out.webglProbe || {};
+    var f = out.siteIframe || {};
+    var s = [];
+    s.push('WebGL2=' + !!g.webgl2);
+    s.push('renderer=' + (g.renderer || '?'));
+    if (g.benchBig) s.push('bench 1920x1080=' + g.benchBig.msPerFrame + 'ms/frame');
+    if (f.loadMs) s.push('site frame load=' + f.loadMs + 'ms');
+    var cw = f.atWork && f.atWork.canvases;
+    if (cw) {
+      var live = 0;
+      for (var i = 0; i < cw.length; i++) if (cw[i].context && cw[i].context.indexOf('webgl') === 0 && cw[i].lost === false) live++;
+      s.push('live webgl contexts @work=' + live);
+    }
+    if (f.atWork && typeof f.atWork.lastDrawAgoMs === 'number') s.push('last scene draw @work=' + f.atWork.lastDrawAgoMs + 'ms ago');
+    return s.join(' | ');
+  }
+
+  var hardCap = setTimeout(function () { finish(false); }, 90000);
+
+  function finish(ok) {
+    if (finished) return;
+    finished = true;
+    clearTimeout(hardCap);
+    out.summary = summary();
+    out.finishedAt = new Date().toISOString();
+    render();
+    copyBtn.hidden = false;
+    hintEl.hidden = false;
+    scrollTop(reportEl);
+    try { window.getSelection().selectAllChildren(reportEl); } catch (e) {}
+    var seconds = Math.round((Date.now() - startedMs) / 1000);
+    var head = (ok ? 'Diagnostic complete (' + seconds + 's).' : 'Diagnostic ended early (' + seconds + 's).');
+    setStatus(head + ' Sending the report to the assistant...', ok ? 'ok' : 'err');
+    function finishStatus(sent) {
+      setStatus(head + (sent
+        ? ' Report sent to the assistant automatically — you are done, this tab can be closed.'
+        : ' Automatic send failed — please click "Copy report" and paste it into the chat.'),
+        ok && sent ? 'ok' : 'err');
+    }
+    try {
+      fetch('/__diag-report', {
+        method: 'POST',
+        headers: { 'content-type': 'text/plain;charset=utf-8' },
+        body: reportEl.textContent || '',
+      }).then(function (r) { finishStatus(!!r.ok); }, function () { finishStatus(false); });
+    } catch (e) { finishStatus(false); }
+  }
+
+  copyBtn.addEventListener('click', function () {
+    var text = reportEl.textContent || '';
+    function done() { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy report'; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+    } else { fallbackCopy(text, done); }
+  });
+  function fallbackCopy(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  // ---- 1. requestAnimationFrame cadence (is the compositor alive?) ----
+  function rafCadence(n) {
+    return new Promise(function (resolve) {
+      var t0 = performance.now(), count = 0, settled = false;
+      function fin(x) { if (!settled) { settled = true; resolve(x); } }
+      function tick() {
+        if (++count >= n) { return fin({ frames: count, ms: Math.round(performance.now() - t0) }); }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      setTimeout(function () { fin({ frames: count, ms: Math.round(performance.now() - t0), timedOut: true }); }, 8000);
+    });
+  }
+
+  // ---- 2. WebGL capability + render benchmark (hardware vs software) ----
+  function glBench(gl, w, h, n) {
+    var vs = 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }';
+    var fs = 'precision mediump float; void main(){ gl_FragColor = vec4(0.85, 0.35, 0.1, 1.0); }';
+    function mk(type, src) {
+      var sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error('shader: ' + gl.getShaderInfoLog(sh));
+      return sh;
+    }
+    var pr = gl.createProgram();
+    gl.attachShader(pr, mk(gl.VERTEX_SHADER, vs));
+    gl.attachShader(pr, mk(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) throw new Error('link: ' + gl.getProgramInfoLog(pr));
+    gl.useProgram(pr);
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(pr, 'p');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    gl.viewport(0, 0, w, h);
+    gl.clearColor(0, 0, 0, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.finish();
+    var t0 = performance.now();
+    for (var i = 0; i < n; i++) {
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    gl.finish();
+    var ms = performance.now() - t0;
+    return { px: w + 'x' + h, frames: n, totalMs: Math.round(ms), msPerFrame: Math.round(ms / n * 100) / 100 };
+  }
+
+  async function glProbe() {
+    var res = {};
+    var c = document.createElement('canvas');
+    c.width = 1920; c.height = 1080;
+    var gl = null;
+    try { gl = c.getContext('webgl2', { antialias: false, powerPreference: 'high-performance' }); } catch (e) { res.webgl2Err = String(e); }
+    res.webgl2 = !!gl;
+    if (!gl) { try { gl = c.getContext('webgl'); } catch (e) { res.webgl1Err = String(e); } }
+    res.webgl1 = !!gl;
+    if (!gl) return res;
+    var lostLost = false;
+    c.addEventListener('webglcontextlost', function (ev) { lostLost = true; try { ev.preventDefault(); } catch (e) {} });
+    try {
+      var dbg = gl.getExtension('WEBGL_debug_renderer_info');
+      res.renderer = dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
+      res.vendor = dbg ? gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL) : gl.getParameter(gl.VENDOR);
+    } catch (e) { res.renderer = 'query failed: ' + e; }
+    try { res.glVersion = gl.getParameter(gl.VERSION); } catch (e) {}
+    try { res.maxTexture = gl.getParameter(gl.MAX_TEXTURE_SIZE); } catch (e) {}
+    try { res.attrs = gl.getContextAttributes(); } catch (e) {}
+    try { res.benchBig = glBench(gl, 1920, 1080, 30); } catch (e) { res.benchBigErr = String(e); }
+    try { res.benchSmall = glBench(gl, 320, 180, 45); } catch (e) { res.benchSmallErr = String(e); }
+    res.lostDuringProbe = lostLost;
+    return res;
+  }
+
+  // ---- 3. live site inside an iframe: contexts, draw activity, paint ----
+  function paintProbe(w, canvas, gl) {
+    return new Promise(function (resolve) {
+      var settled = false;
+      function fin(x) { if (!settled) { settled = true; resolve(x); } }
+      setTimeout(function () { fin({ timeout: true }); }, 2500);
+      try {
+        w.requestAnimationFrame(function () {
+          var res = {};
+          try {
+            var cw = canvas.width, ch = canvas.height;
+            var sw = Math.min(96, cw), sh = Math.min(96, ch);
+            var regions = [[0, 0], [cw - sw, 0], [0, ch - sh], [cw - sw, ch - sh], [(cw - sw) >> 1, (ch - sh) >> 1]];
+            var buf = new Uint8Array(sw * sh * 4);
+            var outRegions = [];
+            for (var k = 0; k < regions.length; k++) {
+              var x = Math.max(0, regions[k][0]);
+              var y = Math.max(0, regions[k][1]);
+              gl.readPixels(x, y, sw, sh, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+              var min = 255, max = 0, sum = 0, n = buf.length / 4, nonzero = 0;
+              for (var i = 0; i < buf.length; i += 4) {
+                var lum = (buf[i] + buf[i + 1] + buf[i + 2]) / 3;
+                if (lum < min) min = lum;
+                if (lum > max) max = lum;
+                sum += lum;
+                if (buf[i] || buf[i + 1] || buf[i + 2]) nonzero++;
+              }
+              outRegions.push({ min: Math.round(min), max: Math.round(max), avg: Math.round(sum / n), nzPct: Math.round(nonzero * 100 / n) });
+            }
+            res.readPixels = outRegions;
+            res.glError = gl.getError();
+          } catch (e) { res.readErr = String(e); }
+          try {
+            var c2 = document.createElement('canvas');
+            c2.width = 96; c2.height = 96;
+            var ctx = c2.getContext('2d');
+            ctx.drawImage(canvas, Math.max(0, (canvas.width - 96) >> 1), Math.max(0, (canvas.height - 96) >> 1), 96, 96, 0, 0, 96, 96);
+            var im = ctx.getImageData(0, 0, 96, 96).data;
+            var nz2 = 0;
+            for (var j = 0; j < im.length; j += 4) if (im[j] || im[j + 1] || im[j + 2]) nz2++;
+            res.drawImageNzPct = Math.round(nz2 * 100 / (im.length / 4));
+          } catch (e) { res.drawErr = String(e); }
+          fin(res);
+        });
+      } catch (e) { fin({ err: String(e) }); }
+    });
+  }
+
+  async function canvasesInfo(w, d) {
+    var list = Array.prototype.slice.call(d.querySelectorAll('canvas'));
+    var res = [];
+    for (var i = 0; i < list.length && i < 10; i++) {
+      var c = list[i];
+      var info = { i: i };
+      try {
+        var r = c.getBoundingClientRect();
+        info.css = Math.round(r.width) + 'x' + Math.round(r.height) + '@top' + Math.round(r.top);
+        info.viewportVisible = r.bottom > -50 && r.top < w.innerHeight + 50;
+      } catch (e) {}
+      info.attr = c.width + 'x' + c.height;
+      info.cssW = Math.round(r.width); info.cssH = Math.round(r.height);
+      info.pxRatio = Math.round(c.width / Math.max(1, r.width) * 100) / 100;
+      info.connected = c.isConnected;
+      var gl = null, kind = '';
+      try { gl = c.getContext('webgl2'); if (gl) kind = 'webgl2'; } catch (e) {}
+      if (!gl) { try { gl = c.getContext('webgl'); if (gl) kind = 'webgl'; } catch (e) {} }
+      if (!gl) { try { kind = c.getContext('2d') ? '2d' : 'none'; } catch (e) { kind = 'err'; } }
+      info.context = kind;
+      if (gl && kind !== '2d') {
+        try { info.lost = gl.isContextLost(); } catch (e) {}
+        try {
+          var dbg = gl.getExtension('WEBGL_debug_renderer_info');
+          if (dbg) info.glRenderer = String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || '').slice(0, 90);
+        } catch (e) {}
+        try {
+          var at = gl.getContextAttributes() || {};
+          info.attrs = [at.alpha ? 'alpha' : '', at.antialias ? 'aa' : '', at.preserveDrawingBuffer ? 'preserve' : '', at.powerPreference || ''].filter(Boolean).join(',');
+        } catch (e) {}
+        if (info.lost === false && info.viewportVisible) {
+          try { info.paint = await paintProbe(w, c, gl); } catch (e) { info.paintErr = String(e); }
+        }
+      }
+      res.push(info);
+    }
+    return res;
+  }
+
+  async function snapshot(f) {
+    var snap = {};
+    var w = f.contentWindow, d = f.contentDocument;
+    try { snap.scrollY = Math.round(w.scrollY); } catch (e) {}
+    try { snap.visibility = d.visibilityState; } catch (e) {}
+    try { snap.docTitle = String(d.title || '').slice(0, 60); } catch (e) {}
+    try { snap.lenisGlobal = typeof w.__lenis; } catch (e) {}
+    try { snap.htmlClass = String(d.documentElement.className || '').slice(0, 100); } catch (e) {}
+    try { snap.preloadLinks = d.querySelectorAll('link[rel="preload"][as="fetch"]').length; } catch (e) {}
+    try { snap.imgs = d.querySelectorAll('img').length; } catch (e) {}
+    try {
+      var card = d.querySelector('div[class*="justify-self-end bg-white"]');
+      snap.cardText = card ? String(card.innerText || '').replace(/\s+/g, ' ').slice(0, 110) : null;
+    } catch (e) {}
+    try {
+      snap.draws = w.__diagDraws || 0;
+      snap.lastDrawAgoMs = w.__diagLastDraw ? Math.round(w.performance.now() - w.__diagLastDraw) : null;
+    } catch (e) {}
+    try { snap.canvases = await canvasesInfo(w, d); } catch (e) { snap.canvasesErr = String(e); }
+    return snap;
+  }
+
+  function scrollIframeTo(f, re, offset) {
+    try {
+      var w = f.contentWindow;
+      var d = f.contentDocument;
+      var els = d.querySelectorAll('h1,h2,h3,h4');
+      var target = null;
+      for (var i = 0; i < els.length; i++) {
+        if (re.test(els[i].textContent || '')) { target = els[i]; break; }
+      }
+      if (!target) return false;
+      var y = Math.max(0, Math.round(target.getBoundingClientRect().top + w.scrollY - offset));
+      w.scrollTo({ top: y, behavior: 'instant' });
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // Scroll the real services section into view (its heading is tag-chip markup, not a
+  // heading tag, so find the service card instead and aim into the section).
+  function scrollServices(f) {
+    try {
+      var w = f.contentWindow, d = f.contentDocument;
+      var card = d.querySelector('div[class*="justify-self-end bg-white"]');
+      if (card) {
+        var sec = card.closest('section');
+        if (sec) {
+          var top = sec.getBoundingClientRect().top + w.scrollY;
+          var frac = (sec.offsetHeight - w.innerHeight) * 0.375;
+          w.scrollTo({ top: Math.max(0, Math.round(top + frac)), behavior: 'instant' });
+          return true;
+        }
+      }
+    } catch (e) {}
+    return scrollIframeTo(f, /services we provide/i, 120);
+  }
+
+  function iframeProbe() {
+    var f = document.getElementById('site');
+    var res = { errors: [], contextLost: [], console: [] };
+    var t0 = performance.now();
+    var hooked = false;
+
+    function attach() {
+      if (hooked) return true;
+      try {
+        var w = f.contentWindow;
+        if (!w || !f.contentDocument) return false;
+        var href = String(w.location.href || '');
+        if (!href || href.indexOf('about:') === 0) return false;
+        hooked = true;
+        try { f.__diagHooked = true; } catch (e) {}
+        // count GL draw calls from now on + track when the last draw happened
+        [w.WebGL2RenderingContext, w.WebGLRenderingContext].forEach(function (ctor) {
+          if (!ctor || !ctor.prototype) return;
+          ['drawArrays', 'drawElements', 'drawArraysInstanced', 'drawElementsInstanced'].forEach(function (m) {
+            var proto = ctor.prototype;
+            if (typeof proto[m] !== 'function' || proto[m].__diagWrapped) return;
+            var orig = proto[m];
+            var wrapped = function () {
+              w.__diagDraws = (w.__diagDraws || 0) + 1;
+              w.__diagLastDraw = w.performance.now();
+              return orig.apply(this, arguments);
+            };
+            wrapped.__diagWrapped = true;
+            proto[m] = wrapped;
+          });
+        });
+        w.addEventListener('error', function (e) {
+          res.errors.push({ t: Math.round(performance.now() - t0), msg: String(e.message || (e.error && e.error.message) || 'script error').slice(0, 160), src: String(e.filename || '').split('/').pop().slice(0, 60) });
+        }, true);
+        w.addEventListener('unhandledrejection', function (e) {
+          res.errors.push({ t: Math.round(performance.now() - t0), msg: 'rejection: ' + String((e.reason && (e.reason.message || e.reason)) || '').slice(0, 160) });
+        });
+        w.addEventListener('webglcontextlost', function (e) {
+          res.contextLost.push({ t: Math.round(performance.now() - t0), el: e.target && e.target.tagName, connected: !!(e.target && e.target.isConnected) });
+        }, true);
+        // console capture (deduped, capped) — catches three/GLTF load complaints
+        try {
+          ['log', 'info', 'warn', 'error'].forEach(function (lvl) {
+            var c = w.console;
+            if (!c || typeof c[lvl] !== 'function' || c[lvl].__diagWrapped) return;
+            var orig = c[lvl];
+            var wrapped = function () {
+              try {
+                var parts = [];
+                for (var i = 0; i < arguments.length && i < 4; i++) {
+                  var a = arguments[i];
+                  parts.push(typeof a === 'string' ? a : (a && a.message) ? a.message : String(a));
+                }
+                var line = parts.join(' ').replace(/\s+/g, ' ').slice(0, 180);
+                if (line) {
+                  var last = res.console.length ? res.console[res.console.length - 1] : null;
+                  if (last && last.msg === line) { last.n++; }
+                  else if (res.console.length < 40) res.console.push({ t: Math.round(w.performance.now()), lvl: lvl, msg: line, n: 1 });
+                }
+              } catch (e) {}
+              return orig.apply(this, arguments);
+            };
+            wrapped.__diagWrapped = true;
+            c[lvl] = wrapped;
+          });
+        } catch (e) {}
+        return true;
+      } catch (e) { return false; }
+    }
+
+    var hookTimer = setInterval(attach, 40);
+    f.src = '/';
+
+    return new Promise(function (resolve) {
+      var settled = false;
+      function doneLoad() { if (!settled) { settled = true; resolve(); } }
+      f.addEventListener('load', doneLoad, { once: true });
+      setTimeout(doneLoad, 15000);
+    }).then(function () {
+      attach();
+      res.loadMs = Math.round(performance.now() - t0);
+      render();
+      return sleep(6000);
+    }).then(function () {
+      try {
+        var w = f.contentWindow;
+        res.size = w.innerWidth + 'x' + w.innerHeight;
+        var perf = w.performance.getEntriesByType('resource');
+        res.resources = { total: perf.length, glb: [], js: 0, css: 0 };
+        for (var i = 0; i < perf.length; i++) {
+          var u = String(perf[i].name);
+          if (/\.glb/.test(u)) res.resources.glb.push(u.split('/').pop() + '@' + Math.round(perf[i].startTime) + 'ms');
+          else if (/\.js/.test(u)) res.resources.js++;
+          else if (/\.css/.test(u)) res.resources.css++;
+        }
+      } catch (e) { res.resourcesErr = String(e); }
+      return snapshot(f);
+    }).then(function (snap) {
+      res.atTop = snap;
+      render();
+      res.scrolledToWork = scrollIframeTo(f, /work we/i, 150);
+      return sleep(5000);
+    }).then(function () {
+      return snapshot(f);
+    }).then(function (snap) {
+      res.atWork = snap;
+      render();
+      res.scrolledToServices = scrollServices(f);
+      return sleep(4000);
+    }).then(function () {
+      scrollServices(f);
+      return sleep(600);
+    }).then(function () {
+      return snapshot(f);
+    }).then(function (snap) {
+      res.atServices = snap;
+      render();
+      return sleep(3500);
+    }).then(function () {
+      return snapshot(f);
+    }).then(function (snap) {
+      res.atServices2 = snap;
+      clearInterval(hookTimer);
+      return res;
+    });
+  }
+
+  // ---- main ----
+  setStatus('JavaScript is running — starting the 30-second diagnostic…');
+  (async function main() {
+    try {
+      out.ua = navigator.userAgent;
+      try { out.isBrave = (navigator.brave && navigator.brave.isBrave) ? await navigator.brave.isBrave() : 'no-brave-api'; } catch (e) { out.isBrave = 'err'; }
+      out.innerSize = innerWidth + 'x' + innerHeight;
+      out.screen = screen.width + 'x' + screen.height;
+      out.dpr = devicePixelRatio;
+      out.pageVisibility = document.visibilityState;
+      out.reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      out.cores = navigator.hardwareConcurrency || null;
+      out.deviceMemoryGB = navigator.deviceMemory || null;
+      out.webgpu = typeof navigator.gpu;
+      render();
+
+      out.rafCadence = await rafCadence(45);
+      render();
+
+      setStatus('Benchmarking WebGL (a few seconds)…');
+      out.webglProbe = await glProbe();
+      render();
+
+      setStatus('Loading the home page in the test frame — about 20 s, keep this tab open…');
+      scrollTop(frameWrap);
+      out.siteIframe = await iframeProbe();
+      render();
+
+      finish(true);
+    } catch (e) {
+      notes.push('main flow error: ' + String(e && (e.stack || e.message) || e));
+      finish(false);
+    }
+  })();
+})();
+</script>
+</body>
+</html>
